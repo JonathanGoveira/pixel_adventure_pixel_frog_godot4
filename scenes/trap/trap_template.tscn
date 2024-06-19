@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://d1q5fpeyt1fa3"]
+
+[node name="TrapTemplate" type="StaticBody2D" groups=["trap"]]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="DetectionArea"]
+
+[node name="Texture" type="Sprite2D" parent="."]
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Texture")
