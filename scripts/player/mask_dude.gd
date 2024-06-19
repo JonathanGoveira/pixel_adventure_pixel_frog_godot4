@@ -12,13 +12,14 @@ const  max_health: float = 25.0
 @export var damage: int = 5
 
 var jump_count: int = 0
+var total_score: int = 0
 var knockback_direction: Vector2
 var is_on_double_jump: bool = false
 var on_knockback: bool = false
 var is_dead: bool = false
-var trap_effect: bool = false
-
+	
 func _physics_process(delta: float) -> void:
+	
 	if is_dead:
 		return
 		
@@ -27,7 +28,6 @@ func _physics_process(delta: float) -> void:
 		knockback_move()
 		return
 	# adicionar barra de vida aqui
-	trampolim()
 	move()
 	var _move = move_and_slide()
 	jump()
@@ -62,31 +62,31 @@ func update_health(target_position: Vector2, value: int, damage_type: String) ->
 		sprite.action_behavior("hit")
 		on_knockback = true
 		health = clamp(health - value, 0, max_health)
+		get_tree().call_group("interface", "update_health", health)
 		if health == 0:
 			is_dead = true
 			sprite.action_behavior("dead")
 		return
 	if damage_type == "increase":
 		health = clamp(health + value, 0, max_health)
+		get_tree().call_group("interface", "update_health", health)
 		
 func knockback_move() -> void:
 	velocity = (knockback_direction * move_speed) * 0.75 
 	var _move := move_and_slide()
-	sprite.animate(velocity)
-	
-func trampolim() -> void:
-	if trap_effect:
-		velocity.y = -600
-		trap_effect = false
-		return
+	sprite.animate(velocity)	
 
 func on_stomp_area_body_entered(body) -> void:
 	# mudar futuramente para causar dano nos inimigos,
 	# e as traps irão ter outros efeitos ao pular em cima, como o fire ser um trampolim
-	if body.is_in_group("inimigo"):
-		#on_knockback = true
-		trap_effect = true
+	if body.is_in_group("trap"):
+		#knockback_direction.y = (global_position - body.global_position).normalized() * 2
 		body.update_health(damage)
 		#sprite.action_behavior("hit")
-		
+		#on_knockback = true
+
+func update_score(score: int):
+	total_score += score
+	get_tree().call_group("interface", "update_score", total_score)
+	#print(total_score)
 	

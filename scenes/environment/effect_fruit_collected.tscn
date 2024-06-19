@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://bmsqejsbq8i0w"]
+
+[ext_resource type="Texture2D" uid="uid://dtsqwpxmgb4x5" path="res://assets/Pixel Adventure 1/Items/Fruits/Collected.png" id="1_smab1"]
+[ext_resource type="Script" path="res://scripts/enviroment/effect_fruit_collected.gd" id="2_r126g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5qm5"]
+atlas = ExtResource("1_smab1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrlv2"]
+atlas = ExtResource("1_smab1")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfe56"]
+atlas = ExtResource("1_smab1")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14wv3"]
+atlas = ExtResource("1_smab1")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pe3h"]
+atlas = ExtResource("1_smab1")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04e63"]
+atlas = ExtResource("1_smab1")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wgfjc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5qm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrlv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfe56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14wv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pe3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04e63")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 20.0
+}]
+
+[node name="EffectFruitCollected" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_wgfjc")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.659763
+script = ExtResource("2_r126g")
+
+[connection signal="animation_finished" from="." to="." method="on_animation_finished"]

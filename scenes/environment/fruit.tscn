@@ -1,0 +1,74 @@
+[gd_scene load_steps=15 format=3 uid="uid://ci7670o4wxmaq"]
+
+[ext_resource type="Script" path="res://scripts/enviroment/fruit.gd" id="1_bwgn7"]
+[ext_resource type="Texture2D" uid="uid://ehpkameqcvsi" path="res://assets/Pixel Adventure 1/Items/Fruits/Apple.png" id="1_c1sv4"]
+[ext_resource type="Texture2D" uid="uid://c3aaali2h5y0e" path="res://assets/Pixel Adventure 1/Items/Fruits/Bananas.png" id="3_okfsq"]
+[ext_resource type="Texture2D" uid="uid://cfijpiptivk7b" path="res://assets/Pixel Adventure 1/Items/Fruits/Cherries.png" id="4_702b4"]
+[ext_resource type="Texture2D" uid="uid://ckybop8oygsrr" path="res://assets/Pixel Adventure 1/Items/Fruits/Kiwi.png" id="5_csul7"]
+[ext_resource type="Texture2D" uid="uid://b0mlvskfrfjaj" path="res://assets/Pixel Adventure 1/Items/Fruits/Melon.png" id="6_ngucm"]
+[ext_resource type="Texture2D" uid="uid://b8k3l00q4d5dv" path="res://assets/Pixel Adventure 1/Items/Fruits/Orange.png" id="7_5xckd"]
+[ext_resource type="Texture2D" uid="uid://cvhf8k70jp5ky" path="res://assets/Pixel Adventure 1/Items/Fruits/Pineapple.png" id="8_rwobr"]
+[ext_resource type="Texture2D" uid="uid://hponcaojh7rv" path="res://assets/Pixel Adventure 1/Items/Fruits/Strawberry.png" id="9_lvs0b"]
+[ext_resource type="PackedScene" uid="uid://bmsqejsbq8i0w" path="res://scenes/environment/effect_fruit_collected.tscn" id="10_88f61"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xhx4v"]
+radius = 7.0
+
+[sub_resource type="Animation" id="Animation_pvssx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hfak7"]
+resource_name = "idle"
+length = 1.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_08svw"]
+_data = {
+"RESET": SubResource("Animation_pvssx"),
+"idle": SubResource("Animation_hfak7")
+}
+
+[node name="Fruit" type="Area2D"]
+script = ExtResource("1_bwgn7")
+fruits = Array[Texture2D]([ExtResource("1_c1sv4"), ExtResource("3_okfsq"), ExtResource("4_702b4"), ExtResource("5_csul7"), ExtResource("6_ngucm"), ExtResource("7_5xckd"), ExtResource("8_rwobr"), ExtResource("9_lvs0b")])
+fruit_effect_collected = ExtResource("10_88f61")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xhx4v")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_c1sv4")
+hframes = 17
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_08svw")
+}
+autoplay = "idle"
+speed_scale = 2.0
+
+[connection signal="body_entered" from="." to="." method="on_body_entered"]

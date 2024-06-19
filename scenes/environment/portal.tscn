@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bndd77y1qwqyj"]
+
+[ext_resource type="Texture2D" uid="uid://508h4c5nmcys" path="res://assets/Pixel Adventure 1/Items/Checkpoints/End/End (Pressed) (64x64).png" id="1_s4lv4"]
+
+[node name="Portal" type="Area2D"]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("1_s4lv4")
+hframes = 8

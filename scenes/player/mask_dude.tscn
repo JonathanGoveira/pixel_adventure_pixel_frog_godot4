@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dl1y28hg3qpw0"]
+[gd_scene load_steps=22 format=3 uid="uid://dl1y28hg3qpw0"]
 
 [ext_resource type="Texture2D" uid="uid://15oh8qffduvq" path="res://assets/Pixel Adventure 1/Main Characters/Mask Dude/Idle (32x32).png" id="1_ad4if"]
 [ext_resource type="Script" path="res://scripts/player/mask_dude.gd" id="1_giecf"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://3h1ohikhswqx" path="res://assets/Pixel Adventure 1/Main Characters/Mask Dude/Double Jump (32x32).png" id="7_e63as"]
 [ext_resource type="Texture2D" uid="uid://bypvmlcvfx3xq" path="res://assets/Pixel Adventure 1/Main Characters/Mask Dude/Hit (32x32).png" id="8_grycs"]
 [ext_resource type="Texture2D" uid="uid://dysf1l3p6uedq" path="res://assets/Pixel Adventure 1/Main Characters/Desappearing (96x96).png" id="9_sfenh"]
+[ext_resource type="PackedScene" uid="uid://bufe44ypx8inf" path="res://scenes/environment/dust.tscn" id="10_v6lc1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tole6"]
 size = Vector2(17, 21)
@@ -361,12 +362,13 @@ jump_speed = -300.0
 position = Vector2(0.5, 4.5)
 shape = SubResource("RectangleShape2D_tole6")
 
-[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("animation", "mask_dude")]
+[node name="Texture" type="Sprite2D" parent="." node_paths=PackedStringArray("animation", "mask_dude", "dust_particles")]
 texture = ExtResource("1_ad4if")
 hframes = 11
 script = ExtResource("3_7u4m6")
 animation = NodePath("../Animation")
 mask_dude = NodePath("..")
+dust_particles = NodePath("../Dust")
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Texture")
@@ -386,6 +388,9 @@ editor_draw_drag_margin = true
 [node name="Collision" type="CollisionShape2D" parent="StompArea"]
 position = Vector2(0, 17)
 shape = SubResource("RectangleShape2D_7jqlc")
+
+[node name="Dust" parent="." instance=ExtResource("10_v6lc1")]
+position = Vector2(0, 14)
 
 [connection signal="animation_finished" from="Animation" to="Texture" method="on_animation_finished"]
 [connection signal="body_entered" from="StompArea" to="." method="on_stomp_area_body_entered"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bufe44ypx8inf"]
+
+[ext_resource type="Texture2D" uid="uid://dvo6ifmb7stqp" path="res://assets/Pixel Adventure 1/Other/Dust Particle.png" id="1_jc5jd"]
+
+[sub_resource type="Curve" id="Curve_hamn8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.977273, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_er1mm"]
+curve = SubResource("Curve_hamn8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0eckw"]
+lifetime_randomness = 0.9
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.6
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_er1mm")
+
+[node name="Dust" type="GPUParticles2D"]
+show_behind_parent = true
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_0eckw")
+texture = ExtResource("1_jc5jd")
