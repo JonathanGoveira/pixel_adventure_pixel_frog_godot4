@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp3suj285x5og"]
+[gd_scene load_steps=8 format=3 uid="uid://cp3suj285x5og"]
 
 [ext_resource type="Script" path="res://scripts/enviroment/interface.gd" id="1_m3uk2"]
 [ext_resource type="FontFile" uid="uid://b670npoic3o0x" path="res://assets/monogram/ttf/monogram.ttf" id="1_vdnpo"]
+[ext_resource type="Texture2D" uid="uid://ehpkameqcvsi" path="res://assets/Pixel Adventure 1/Items/Fruits/Apple.png" id="3_or8tx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_fg7lt"]
 font = ExtResource("1_vdnpo")
@@ -11,25 +12,123 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.223529)
 
+[sub_resource type="Animation" id="Animation_530py"]
+resource_name = "fruits_interface"
+length = 0.17
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label/Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_or8tx")]
+}
+
+[sub_resource type="Animation" id="Animation_4xk6k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label/Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_or8tx")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p1e7p"]
+_data = {
+"RESET": SubResource("Animation_4xk6k"),
+"fruits_interface": SubResource("Animation_530py")
+}
+
 [node name="Interface" type="CanvasLayer" groups=["interface"]]
 script = ExtResource("1_m3uk2")
 
 [node name="Score" type="Label" parent="."]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 166.0
-offset_bottom = 36.0
-text = "Score 999999"
-label_settings = SubResource("LabelSettings_fg7lt")
-
-[node name="Health" type="Label" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -166.0
-offset_top = 10.0
+offset_left = -95.0
+offset_top = -1.0
 offset_right = -10.0
-offset_bottom = 36.0
+offset_bottom = 25.0
 grow_horizontal = 0
-text = "Health 0"
+text = "0/0"
 label_settings = SubResource("LabelSettings_fg7lt")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -13.0
+offset_top = 15.0
+offset_right = -1.0
+offset_bottom = 38.0
+grow_horizontal = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="Label"]
+position = Vector2(-4, 0)
+texture = ExtResource("3_or8tx")
+hframes = 17
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p1e7p")
+}

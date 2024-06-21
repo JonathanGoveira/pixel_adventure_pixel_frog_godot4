@@ -1,11 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://bndd77y1qwqyj"]
+[gd_scene load_steps=4 format=3 uid="uid://bndd77y1qwqyj"]
 
+[ext_resource type="Script" path="res://scripts/enviroment/portal.gd" id="1_3xrjr"]
 [ext_resource type="Texture2D" uid="uid://508h4c5nmcys" path="res://assets/Pixel Adventure 1/Items/Checkpoints/End/End (Pressed) (64x64).png" id="1_s4lv4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8vy6s"]
+size = Vector2(36, 38)
+
 [node name="Portal" type="Area2D"]
+script = ExtResource("1_3xrjr")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("RectangleShape2D_8vy6s")
 
 [node name="Texture" type="Sprite2D" parent="."]
 texture = ExtResource("1_s4lv4")
 hframes = 8
+
+[connection signal="body_entered" from="." to="." method="on_body_entered"]

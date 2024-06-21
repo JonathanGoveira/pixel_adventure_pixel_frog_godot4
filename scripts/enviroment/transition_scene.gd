@@ -12,7 +12,7 @@ func fade_in() -> void:
 
 func on_animation_animation_finished(anim_name):
 	if anim_name == "fade_in":
-		var _change_scene: bool = get_tree().change_scene_to_file(str(scene_path))
+		var _change_scene: bool = get_tree().change_scene_to_file(scene_path)
 		animation.play("fade_out")
 	# emitindo o sinal na saída da cena para a próxima cena
 	if anim_name == "fade_out":

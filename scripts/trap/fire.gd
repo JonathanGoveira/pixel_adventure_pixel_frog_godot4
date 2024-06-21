@@ -1,49 +1,53 @@
 extends StaticBody2D
 
-const max_health: int = 25
-@onready var state_timer: Timer = get_node("StateTimer")
-@onready var animation: AnimationPlayer = get_node("Animation")
+@onready var animation: AnimationPlayer = $Animation
+@onready var collision_shape = $Collision
+@onready var hit_timer: Timer = $HitTimer
+@onready var on_timer: Timer = $OnTimer
+@onready var detection_area = $DetectionArea
 
-@export var damage: int = 0
-@export var health: int = 15
+var is_on = false
 
-var current_state: String = "off"
-var is_invincible: bool = false
+func _ready() -> void:
+	animation.play("off")
+	#detection_area.connect("body_entered", self, "on_detection_area_body_entered")
+	#hit_timer.connect("timeout", self, "_on_hit_timeout")
+	#on_timer.connect("timeout", self, "_on_on_timeout")
 
-func on_state_timer_timeout():
-	state_timer.start()
-	if current_state == "off":
-		current_state = "on"
-		is_invincible = true
-		animation.play(current_state)
-		return
-	if current_state == "on":
-		current_state = "off"
-		is_invincible = false
-		animation.play(current_state)
-		return
-
-
-func on_detection_area_body_entered(body) -> void:
+func on_detection_area_body_entered(body):
 	if body.is_in_group("mask_dude"):
-		body.update_health(global_position, damage, "decrease")
-		
-func update_health(value: int) -> void:
-	if is_invincible: # verifica se a trap está invencivel
-		return # return para sair da função e não executar os processos abaixo
-	
-	health = clamp(health - value, 0, max_health) # atualiza a vida entre os valores 0 e max_health
-	
-	if health == 0: # verifica se a vida é igual a 0
-	
-		state_timer.stop() # para o timer para não haver mais transições de animação
-		current_state = "off" # seta a animação para off
-		animation.play(current_state) # atualiza a animação
-		return # return para sair da função
-		
-	animation.play("hit"); # atualiza a animação para o hit caso a trap tenha tomado um hit
-	
+		print("mask dude colidiu")
+		if is_body_above_trap(body):
+			print("entrou aqui")
+			hit()
+		else:
+			turn_on()
+
+func is_body_above_trap(character):
+	var trap_rect = collision_shape.shape.get_rect()
+	trap_rect.position += global_position
+	var character_rect = character.get_node("Collision").shape.get_rect()
+	character_rect.position += character.global_position
+	return character_rect.position.y + character_rect.size.y <= trap_rect.position.y
+
+func hit():
+	animation.play("hit")
+	hit_timer.start(0.5) # Tempo da animação "Hit"
+
+func turn_on():
+	if not is_on:
+		is_on = true
+		animation.play("on")
+		on_timer.start(1.0) # Tempo da animação "On"
+
+func on_hit_timeout():
+	animation.play("off")
+	is_on = false
+
+func on_on_timeout():
+	animation.play("off")
+	is_on = false
 
 func on_animation_finished(anim_name: String) -> void:
-	if anim_name == "hit":
-		animation.play(current_state)
+	if anim_name == "hit" or anim_name == "on":
+		animation.play("off")

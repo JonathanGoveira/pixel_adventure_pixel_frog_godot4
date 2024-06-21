@@ -6,7 +6,7 @@ extends Node2D
 #@export var scene: PackedScene = null
 # este código exemplifica a adição de cenas de transição como cutscenes
 func _ready() -> void:
-	interface.update_health(player.max_health)
+#	interface.update_health(player.max_health)
 	transition_scene.scene_path = scene_path
 	
 	transition_scene.connect(
