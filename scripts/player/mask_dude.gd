@@ -70,6 +70,8 @@ func knockback_move() -> void:
 
 func on_stomp_area_body_entered(body) -> void:
 	if body.is_in_group("trap"):
+		#if body.turn_on():
+		#	body.turn_on()
 		var trap = body
 		#trap.activate_hit()
 

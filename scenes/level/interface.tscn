@@ -12,10 +12,8 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 4
 shadow_color = Color(0, 0, 0, 0.223529)
 
-[sub_resource type="Animation" id="Animation_530py"]
-resource_name = "fruits_interface"
-length = 0.17
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_4xk6k"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -53,8 +51,10 @@ tracks/2/keys = {
 "values": [ExtResource("3_or8tx")]
 }
 
-[sub_resource type="Animation" id="Animation_4xk6k"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_530py"]
+resource_name = "fruits_interface"
+length = 0.17
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
