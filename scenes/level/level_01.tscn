@@ -16,6 +16,18 @@ scroll_offset = Vector2(-512.315, 179.335)
 [node name="Fire" parent="Trap" index="0" instance=ExtResource("2_nf5i4")]
 position = Vector2(184, 32)
 
+[node name="Fire2" parent="Trap" index="1" instance=ExtResource("2_nf5i4")]
+position = Vector2(199, 32)
+
+[node name="Fire3" parent="Trap" index="2" instance=ExtResource("2_nf5i4")]
+position = Vector2(214, 32)
+
+[node name="Fire4" parent="Trap" index="3" instance=ExtResource("2_nf5i4")]
+position = Vector2(229, 32)
+
+[node name="Fire5" parent="Trap" index="4" instance=ExtResource("2_nf5i4")]
+position = Vector2(244, 32)
+
 [node name="Portal" parent="." index="6" instance=ExtResource("3_sm5pp")]
 position = Vector2(430, 16)
 scene_path = "res://scenes/level/level_02.tscn"

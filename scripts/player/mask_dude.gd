@@ -51,18 +51,6 @@ func jump() -> void:
 		sprite.action_behavior("double_jump")
 		is_on_double_jump = true
 
-func update_health(target_position: Vector2, value: int, damage_type: String) -> void:
-	if is_dead:
-		return
-		
-	if damage_type == "decrease":
-		knockback_direction = (global_position - target_position).normalized()
-		sprite.action_behavior("hit")
-		on_knockback = true
-		is_dead = true
-		sprite.action_behavior("dead")
-		return
-
 func knockback_move() -> void:
 	velocity = (knockback_direction * move_speed) * 0.75
 	move_and_slide()
@@ -73,6 +61,8 @@ func on_stomp_area_body_entered(body) -> void:
 		#if body.turn_on():
 		#	body.turn_on()
 		var trap = body
+		#trap.fire(self)
+		return
 		#trap.activate_hit()
 
 func update_score(score: int):
