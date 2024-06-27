@@ -20,7 +20,6 @@ func _ready() -> void:
 func on_body_entered(body):
 	if body.is_in_group("mask_dude"):
 		body.update_score(score)
-		body.update_health(Vector2.ZERO, cure, "increase")
 		spaw_effect_fruit_collected()
 		queue_free()
 		
