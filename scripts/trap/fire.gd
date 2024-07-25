@@ -22,6 +22,7 @@ func on_fire_area_body_entered(body):
 		if not is_body_above_trap(body) and current_state == "on":
 			print("Player tomou dano")
 			body.sprite.action_behavior("dead")
+			
 func is_body_above_trap(character):
 	var trap_rect = collision_shape.shape.get_rect()
 	trap_rect.position += global_position
