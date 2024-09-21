@@ -13,6 +13,7 @@ func _ready() -> void:
 	animation.play("off")
 
 func on_detection_area_body_entered(body):
+	print(body.name)
 	if body.is_in_group("mask_dude"):
 		if not is_body_above_trap(body) and current_state == "off":
 			hit()
